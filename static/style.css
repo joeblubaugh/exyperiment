@@ -1,0 +1,28 @@
+body {
+    max-width: 1600px;
+    font-family: Helvetica, Verdana, Arial, sans-serif;
+}
+
+#heading {
+    width:100%;
+}
+
+#main {
+    width:100%;
+}
+
+#sidebar {
+    width: 200px;
+    display: inline-block;
+}
+
+#content {
+    display: inline-block;
+    height: 100%;
+    padding-top: 100px;
+    vertical-align: top;
+}
+
+.two-images, .three-images {
+    border: 3px solid black;
+}
