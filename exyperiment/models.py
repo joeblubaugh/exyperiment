@@ -43,8 +43,8 @@ class Demographics(models.Model):
 
 class Participant(models.Model):
     NUM_IMAGES_CHOICES = ((2, "Two"), (3, "Three"))
-    num_images = models.PositiveSmallIntegerField(choices = NUM_IMAGES_CHOICES, default=2, blank=True)
-    demographics = models.ForeignKey(Demographics, blank=True)
+    num_images = models.PositiveSmallIntegerField(choices = NUM_IMAGES_CHOICES, default=2, blank=True, null=True)
+    demographics = models.ForeignKey(Demographics, blank=True, null=True)
 
 class ImageSet(models.Model):
     imageOne = models.FileField(blank=True, upload_to="images/")
@@ -57,7 +57,7 @@ class Answer(models.Model):
     user = models.ForeignKey(Participant, verbose_name="The Participant who entered this answer.")  # Which User
     imageSet = models.ForeignKey(ImageSet)  # Which image set served, by ID.
     WHICH_CHOICES = (("1 2 3", "1 2 3"), ("1 2", "1 2"), ("2 3", "2 3"), ("1 3", "1 3"))
-    which = models.TextField(choices = WHICH_CHOICES)  # Images selected by computer
+    which = models.TextField(blank=True, choices = WHICH_CHOICES)  # Images selected by computer
     value = models.PositiveIntegerField()  # Price input by user
 
 # Put some classes in the admin interface!

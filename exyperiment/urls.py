@@ -4,5 +4,6 @@ import views
 
 urlpatterns = patterns('',
     url('^$', views.start_page),
-    url('^query$', views.query_page),
+    url('^experiment', views.experiment_page),
+    url('^survey', views.survey),
     )

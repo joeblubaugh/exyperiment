@@ -1,27 +1,31 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html>
 <head>
     <title>Survey in progress...</title>
 </head>
 <body>
-  <div id="heading"></div>
+  <div id="heading">
+      <img src="{% static "header.png" %}" />
+  </div>
   <div id="main">
       <div id="sidebar">
-
+          <img src="{% static "sidebar.png" %}" />
       </div>
       <div id="content">
           {% if num_images == 2 %}
-              <img class="two-images" href="" />
-              <img class="two-images" href="" />
+              <img class="two-images" src="{{ image_set.imageOne.url }}" />
+              <img class="two-images" src="{{ image_set.imageTwo.url }}" />
           {% elif num_images == 3 %}
-              <img class="three-images" href="" />
-              <img class="three-images" href="" />
-              <img class="three-images" href="" />
+              <img class="three-images" src="{{ image_set.imageOne.url }}" />
+              <img class="three-images" src="{{ image_set.imageTwo.url }}" />
+              <img class="three-images" src="{{ image_set.imageThree.url }}" />
           {% endif %}
-          <form method="post" action="?">
+          <form method="post" action="?"> {% csrf_token %}
               <label for="dollar-value">These {{ num_images }} chairs have the same price.<br />
                   How much do you think one of these items costs? Please enter a value between 100 - 900.</label>
               $<input type="text" id="dollar-value" name="dollar-value">.00
+              <input type="hidden" name="image-set-id" value="{{ image_set.id }}">
               <input type="submit" name="enter" value="Enter">
           </form>
       </div>
