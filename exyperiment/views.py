@@ -2,6 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404, HttpRespons
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from models import Participant, ImageSet, Answer
+from forms import DemographicsForm
 
 import random
 
@@ -70,7 +71,8 @@ def survey(request):
         return Http404()
 
     if request.method == "GET":
-        return render_to_response("demographics.html", context_instance=RequestContext(request))
+        form = DemographicsForm()
+        return render_to_response("demographics.html", {"form" : form}, context_instance=RequestContext(request))
     elif request.method == "POST":
         # Create and link demographics object
         request.session.clear()

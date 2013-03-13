@@ -1,9 +1,13 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html>
 <head>
-    <title></title>
+    <link rel="stylesheet" type="text/css" href="{% static "style.css" %}">
+    <title>Last page...</title>
 </head>
 <body>
-
+  <form method="post" action="?"> {% csrf_token %}
+      {{ form.as_p }}
+  </form>
 </body>
 </html>
