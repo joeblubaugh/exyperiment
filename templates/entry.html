@@ -2,6 +2,7 @@
 {% load staticfiles %}
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="{% static "style.css" %}">
     <title>Survey in progress...</title>
 </head>
 <body>
@@ -12,11 +13,11 @@
       <div id="sidebar">
           <img src="{% static "sidebar.png" %}" />
       </div>
-      <div id="content">
-          {% if num_images == 2 %}
+      <div id="content" class="{{ image_set.distance }} {{ num_images }}">
+          {% if num_images == "two" %}
               <img class="two-images" src="{{ image_set.imageOne.url }}" />
               <img class="two-images" src="{{ image_set.imageTwo.url }}" />
-          {% elif num_images == 3 %}
+          {% elif num_images == "three" %}
               <img class="three-images" src="{{ image_set.imageOne.url }}" />
               <img class="three-images" src="{{ image_set.imageTwo.url }}" />
               <img class="three-images" src="{{ image_set.imageThree.url }}" />

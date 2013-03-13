@@ -43,7 +43,7 @@ def experiment_page(request):
                 return HttpResponseServerError(content="No image set found")
             # TODO : Add "which" parameter
             data = {"image_set": next_set,
-                    "num_images": participant.num_images}
+                    "num_images": "two" if participant.num_images is 2 else "three"}
             return render_to_response("entry.html",
                                       data,
                                       context_instance=RequestContext(request))
@@ -60,4 +60,17 @@ def experiment_page(request):
 
 
 def survey(request):
-    return HttpResponse("Congartulations!")
+    participant_id = request.session['participant_id']
+    if not participant_id:
+        return HttpResponseRedirect("/")
+
+    # Get participant & an image set ID that we don't have yet.
+    participant = Participant.objects.get(id=participant_id)
+    if not participant:
+        return Http404()
+
+    if request.method == "GET":
+        return render_to_response("demographics.html", context_instance=RequestContext(request))
+    elif request.method == "POST":
+        # Create and link demographics object
+        request.session.clear()

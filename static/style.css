@@ -23,6 +23,50 @@ body {
     vertical-align: top;
 }
 
+#content form {
+    max-width: 640px;
+    padding-left: 32px;
+    padding-top: 45px;
+    margin: auto;
+}
+
 .two-images, .three-images {
     border: 3px solid black;
 }
+
+.N.three {
+    padding-left: 146px;
+}
+
+.N.two {
+    padding-left: 302px;
+}
+
+.N img {
+    margin-left: 40px;
+}
+
+.M.three {
+    padding-left: 73px;
+}
+
+.M.two {
+    padding-left: 262px;
+}
+
+.M img {
+    margin-left: 80px;
+}
+
+.F.three {
+    padding-left: 9px;
+}
+
+.F.two {
+    padding-left: 222px;
+}
+
+.F img {
+    margin-left: 120px;
+}
+
