@@ -80,10 +80,17 @@ def survey(request):
         form = DemographicsForm()
         return render_to_response("demographics.html", {"form" : form}, context_instance=RequestContext(request))
     elif request.method == "POST":
-        # Create and link demographics object
-        request.session.clear()
-        # Save the form
-        return HttpResponseRedirect("/thankyou/")
+        form = DemographicsForm(request.POST)
+        if not form.is_valid():
+            return render_to_response("demographics.html", {"form" : form}, context_instance=RequestContext(request))
+        else :
+            # Create and link demographics object
+            request.session.clear()
+            # Save the form
+            demog = form.save()
+            participant.demographics_id = demog.id
+            participant.save()
+            return HttpResponseRedirect("/thankyou/")
 
 def thank_you(request):
-    return render_to_response("thankyou.html", context_instance=RequestContext(request))
+    return render_to_response("finished.html", context_instance=RequestContext(request))
