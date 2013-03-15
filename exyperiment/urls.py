@@ -6,4 +6,5 @@ urlpatterns = patterns('',
     url('^$', views.start_page),
     url('^experiment', views.experiment_page),
     url('^survey', views.survey),
+    url('^thankyou', views.thank_you)
     )

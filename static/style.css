@@ -70,3 +70,18 @@ body {
     margin-left: 120px;
 }
 
+form ul {
+    list-style: none;
+    margin: 0;
+    margin-bottom: 1em;
+}
+
+form p {
+    margin: 0;
+    margin-top: 2em;
+}
+
+form p .nomargin {
+    margin: 1em;
+}
+

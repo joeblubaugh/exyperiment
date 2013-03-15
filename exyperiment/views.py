@@ -2,7 +2,8 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404, HttpRespons
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from models import Participant, ImageSet, Answer
-from forms import DemographicsForm
+from forms import DemographicsForm, remove_holddown
+import random
 
 import random
 
@@ -37,9 +38,14 @@ def experiment_page(request):
 
     if request.method == "GET":
         answers_count = participant.answer_set.count()
-        if answers_count < 60:
-            # TODO : Randomize order of image sets.
-            next_set = ImageSet.objects.order_by('id')[answers_count]
+        image_sets = {x.imageSet_id for x in participant.answer_set.all()}
+        total_set = {x for x in range(1, 61)}
+        allowed = total_set.difference(image_sets)
+        if len(allowed) > 0:
+            random.seed()
+            idx = random.sample(allowed, 1)[0]
+            next_set = ImageSet.objects.get(id=idx)
+
             if not next_set:
                 return HttpResponseServerError(content="No image set found")
             # TODO : Add "which" parameter
@@ -76,3 +82,8 @@ def survey(request):
     elif request.method == "POST":
         # Create and link demographics object
         request.session.clear()
+        # Save the form
+        return HttpResponseRedirect("/thankyou/")
+
+def thank_you(request):
+    return render_to_response("thankyou.html", context_instance=RequestContext(request))

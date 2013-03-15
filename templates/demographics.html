@@ -6,8 +6,13 @@
     <title>Last page...</title>
 </head>
 <body>
+  <p class="nomargin">
+      Thank you! After you complete this demographic survey, you have finished the study.
+      Please check out with the investigator at the front of the room.
+  </p>
   <form method="post" action="?"> {% csrf_token %}
       {{ form.as_p }}
+      <input type="submit" name="finish" value="Finish Survey">
   </form>
 </body>
 </html>
